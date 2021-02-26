@@ -4,7 +4,7 @@ Soraka is a Node.js Wrapper inspired by [Irelia](https://github.com/perezpaya/ir
 
 In order to get your Riot API Key, you need create an account at [http://developer.riotgames.com](http://developer.riotgames.com)
 
-### Basic Usage
+### Initialization
 
 ```javascript
 const Soraka = require("./controller");
@@ -14,21 +14,29 @@ const soraka = new Soraka({
   host: "api.riotgames.com",
   apiKey: "Your API Key",
 });
+```
 
-// [getChampionByName] => Get Champion Information By Name
+### Basic Usage => Fetching a single element
+
+```javascript
 soraka.getChampionByName("lan", "Soraka", (err, res) => console.log(res));
 ```
 
-### Advanced Usage => Fetching Custom Data using Callbacks
+### Advanced Usage => Fetching Multiple Elemens using Callbacks
 
 ```javascript
+// First, you have to request the summoner id with the getSummonerByName Method.
 soraka.getSummonerByName("lan", "Sünlight", (err, res) => {
   console.log(err, res);
+
+  // Then, use the summoner[id] inside the getAllChampionMasteries method.
   soraka.getAllChampionMasteries("lan", res["id"], (err, res) => {
     console.log(err, res);
   });
 });
 ```
+
+### Advanced Usage => Fetching Multiple Elemens using Async / Await
 
 ```javascript
 const getSummonerInfo = async (region, name) => {
@@ -62,6 +70,7 @@ const getSummonerInfo = async (region, name) => {
   });
 };
 
+// Calling Method
 getSummonerInfo("lan", "Möönlight");
 ```
 
