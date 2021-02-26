@@ -107,7 +107,7 @@ module.exports = class Soraka {
   getSummonerByName(region, summonerName, callback) {
     const url = this.generateUrl({
       region,
-      path: `/lol/summoner/v4/summoners/by-name/${summonerName}`,
+      path: `/lol/summoner/v4/summoners/by-name/${encodeURI("Möönlight")}`,
     });
     return this.makeRequest(url, callback);
   }
